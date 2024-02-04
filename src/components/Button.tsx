@@ -14,13 +14,14 @@ function Button(props: Props) {
 
   /* COMPONENT STYLES */
   const styles = twMerge(
-    primary ? 'bg-emerald-700 text-white' : 'bg-white',
     'py-3',
     'px-7',
     'rounded-md',
-    'hover:brightness-75',
-    'transition-all ease-in delay-150',
+    'transition-all ease-in duration-150',
     'font-bold',
+    'text-gray-800',
+    primary ? 'hover:bg-emerald-900' : 'hover:bg-gray-100',
+    primary ? 'bg-emerald-700 text-white' : 'bg-white',
     className
   );
 

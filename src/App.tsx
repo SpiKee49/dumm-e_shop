@@ -1,15 +1,22 @@
 import './App.css';
 
-import Header from './components/Header';
-import WelcomeBanner from './components/WelcomeBanner';
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
+
+import Homepage from './views/Homepage';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Homepage />} />
+  )
+);
 
 function App() {
-  return (
-    <div>
-      <Header />
-      <WelcomeBanner />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
