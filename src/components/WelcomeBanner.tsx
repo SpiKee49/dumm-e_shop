@@ -3,7 +3,7 @@ import React from 'react';
 
 function WelcomeBanner() {
   return (
-    <div className="flex flex-row max-w-[70%] mx-auto pt-28 justify-between">
+    <div className="flex flex-row max-w-[70%] mx-auto py-28 justify-between">
       <section className="w-[30%] flex flex-col justify-start gap-10">
         <h1 className="text-5xl font-bold">
           Best Place to Buy <br />
