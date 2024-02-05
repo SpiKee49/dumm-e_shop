@@ -3,9 +3,11 @@ import Title from './Title';
 
 function Categories() {
   return (
-    <>
-      <Title className="text-center mb-6">Categories</Title>
-      <div className="mx-auto w-4/5 flex flex-row justify-center items-center [&>*]:flex-1 h-[600px]">
+    <div className="w-4/5 mx-auto">
+      <Title className="text-left mb-6 font-semibold text-gray-800">
+        Browse categories
+      </Title>
+      <div className="flex flex-row justify-center items-center [&>*]:flex-1 h-[600px]">
         <section className="flex flex-col justify-center items-center [&>*]:flex-1 h-full">
           <div className="bg-green-400 rounded-3xl w-full m-3 bg-cover bg-[url(./clothes.webp)] hover:scale-105 transition-all duration-100 group/card">
             <div className="bg-gradient-to-b from-black/75 rounded-t-3xl text-white font-bold text-2xl pl-10 pt-10 h-2/3">
@@ -38,7 +40,7 @@ function Categories() {
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }
 
