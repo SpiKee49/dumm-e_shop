@@ -1,70 +1,34 @@
-import {
-  FaClock,
-  FaHandshakeSimple,
-  FaTruckFast,
-} from 'react-icons/fa6';
+import React, { useEffect, useState } from 'react';
 
 import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { IconContext } from 'react-icons';
-import React from 'react';
-import Title from '../components/Title';
+import { Product } from '../../types';
+import ProductSlider from '../components/ProductSlider';
+import Services from '../components/Services';
 import WelcomeBanner from '../components/WelcomeBanner';
+import { getRandomProducts } from '../api/calls';
 
 function Homepage() {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    // Fetching initial data
+    (async () => {
+      setProducts(await getRandomProducts(9));
+    })();
+  }, []);
+
   return (
     <div>
       <Header />
       <WelcomeBanner />
       <Categories />
-      <section className="my-[200px]">
-        <IconContext.Provider
-          value={{
-            className: 'text-emerald-700',
-            size: '100px',
-          }}
-        >
-          <Title className="text-center font-semibold">
-            <span className="text-gray-800">
-              Why Choose
-            </span>{' '}
-            Dumm-e?
-          </Title>
-          <div className="flex flex-row justify-center items-center mt-10 gap-28">
-            <div className="flex flex-col justify-center items-center max-w-[400px] text-center gap-5">
-              <FaTruckFast />
-              <h2 className="text-3xl font-bold">
-                Free Delivery
-              </h2>
-              <p className="text-gray-500 text-sm">
-                Lorem ipsum dolor sit amet, consectetu
-                adipiscing elit, sed do eiusmod tempor
-              </p>
-            </div>
-            <div className="flex flex-col justify-center items-center max-w-[400px] text-center gap-5">
-              <FaHandshakeSimple />
-              <h2 className="text-3xl font-bold">
-                Trusted Platform
-              </h2>
-              <p className="text-gray-500 text-sm">
-                Lorem ipsum dolor sit amet, consectetu
-                adipiscing elit, sed do eiusmod tempor
-              </p>
-            </div>
-            <div className="flex flex-col justify-center items-center max-w-[400px] text-center gap-5">
-              <FaClock />
-              <h2 className="text-3xl font-bold">
-                Here For You
-              </h2>
-              <p className="text-gray-500 text-sm">
-                Lorem ipsum dolor sit amet, consectetu
-                adipiscing elit, sed do eiusmod tempor
-              </p>
-            </div>
-          </div>
-        </IconContext.Provider>
-      </section>
+      <Services />
+      <ProductSlider
+        products={products}
+        numberOfProducts={6}
+      />
       <Footer />
     </div>
   );
