@@ -1,7 +1,8 @@
 import LoginButtons from '../LoginButtons';
-import Menu from './Menu';
+// import Menu from './Menu';
 import React from 'react';
 import Title from './Title';
+import Search from './Search';
 
 function Header() {
   return (
@@ -9,7 +10,8 @@ function Header() {
       <Title>
         Dumm-e <span className="text-black">shop</span>
       </Title>
-      <Menu />
+      <Search />
+      {/* <Menu /> */}
       <LoginButtons />
     </div>
   );
