@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import Categories from '../components/Categories';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+import Footer from '../components/Footer/Footer';
+import Header from '../components/Header/Header';
 import { Product } from '../../types';
 import ProductSlider from '../components/ProductSlider';
 import Services from '../components/Services';

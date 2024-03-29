@@ -1,4 +1,4 @@
-import LoginButtons from './LoginButtons';
+import LoginButtons from '../LoginButtons';
 import Menu from './Menu';
 import React from 'react';
 import Title from './Title';

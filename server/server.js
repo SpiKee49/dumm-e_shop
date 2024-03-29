@@ -18,7 +18,7 @@ app.get('/', async (_, res) => {
     const result = await pgClient.query(
       'SELECT version();'
     );
-    res.json(result);
+    res.json(result.rows[0]);
   } catch (error) {
     console.error(error);
     res

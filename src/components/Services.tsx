@@ -6,7 +6,7 @@ import {
 
 import { IconContext } from 'react-icons';
 import React from 'react';
-import Title from './Title';
+import Title from './Header/Title';
 
 function Services() {
   return (
