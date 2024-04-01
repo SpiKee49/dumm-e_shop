@@ -6,7 +6,7 @@ const Axios = axios.create({
 });
 
 export const LocalAxios = axios.create({
-  baseURL: 'localhost',
+  baseURL: '//localhost:3000',
   timeout: 1000,
 });
 
