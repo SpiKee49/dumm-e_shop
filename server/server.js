@@ -31,26 +31,31 @@ app.get('/', async (_, res) => {
   }
 });
 
-app.get('/products', async (req, res) => {
+app.get('/product', async (req, res) => {
   const filter = req.query.name;
-
   try {
     const result = await pgClient.query(
-      `SELECT p.id, p.name, pp.thumbnail, pp.thumbnail_name
-        FROM "Production"."ProductProductPhoto" as ppp
-        JOIN (
-          SELECT "Name" as name, "ProductID" as id
-          FROM "Production"."Product"
-          WHERE "Name" ILIKE '%${filter}%'
-        ) as p 
-          ON p.id = ppp."ProductID"
-        JOIN (
-          SELECT "ProductPhotoID" as photo_id, "ThumbNailPhoto" as thumbnail, "ThumbnailPhotoFileName" as thumbnail_name
-          FROM "Production"."ProductPhoto"
-        ) as pp 
-          ON pp.photo_id = ppp."ProductPhotoID"
-        LIMIT 5;`
+      `SELECT "Name" as name, "ProductID" as id
+      FROM "Production"."Product"
+      WHERE "Name" ILIKE '%${filter}%' LIMIT 5`
     );
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: 'Something went wrong',
+      error,
+    });
+  }
+});
+
+app.get('/product-safe', async (req, res) => {
+  // Parametrizovaný dotaz
+  const sql =
+    'SELECT "Name" as name, "ProductID" as id FROM "Production"."Product" WHERE "Name" ILIKE $1 LIMIT 5';
+  const values = [`%${req.query.name}%`];
+  try {
+    const result = await pgClient.query(sql, values);
     res.json(result.rows);
   } catch (error) {
     console.error(error);

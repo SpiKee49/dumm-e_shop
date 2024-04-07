@@ -30,15 +30,15 @@ function Search() {
     []
   );
 
-  const fetchSearched = async () => {
-    if (debouncedSearch === '') {
+  const fetchSearched = async (value: string) => {
+    if (value === '') {
       setResults([]);
       return;
     }
 
     try {
       const response = await LocalAxios.get(
-        '/products?name=test'
+        `/product-safe?name=${value}`
       );
       setResults(response.data);
     } catch (error) {
@@ -53,13 +53,14 @@ function Search() {
   };
 
   useEffect(() => {
-    fetchSearched();
+    if (debouncedSearch !== undefined)
+      fetchSearched(debouncedSearch);
   }, [debouncedSearch]);
 
   return (
     <div className="relative flex flex-col gap-3">
       <input
-        className="border-slate-400 focus:border-green-700 border-2 text-black "
+        className="border-slate-400 focus:border-green-700 border-2 text-black p-2 rounded-md"
         type="text"
         value={searchedValue}
         placeholder="Serach for product"
@@ -68,22 +69,11 @@ function Search() {
       {results.length > 0 && (
         <div className="absolute top-[2em] left-0 w-full border-2 shadow-md rounded-md shadow-black bg-white">
           {results.map(item => {
-            const base64String = btoa(
-              String.fromCharCode(
-                ...new Uint8Array(item.thumbnail.data)
-              )
-            );
-
             return (
               <div
                 key={item.id}
                 className="flex h-[40px] w-full items-center hover:bg-slate-200 hover:cursor-pointer"
               >
-                <img
-                  className="h-full w-auto"
-                  src={`data:image/png;base64,${base64String}`}
-                  alt={item.thumbnail_name}
-                />
                 <span>{item.name}</span>
               </div>
             );
